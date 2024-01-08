@@ -1,14 +1,19 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
-import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    cors: true,
+    bufferLogs: true,
+  });
   const configService = app.get(ConfigService);
-
+  const log = app.get(Logger);
+  app.useLogger(log);
   app.setGlobalPrefix('api');
-  app.enableCors();
+
   app.useGlobalPipes(
     new ValidationPipe({ transform: true, errorHttpStatusCode: 422 }),
   );
@@ -21,6 +26,6 @@ async function bootstrap() {
 
   const appPort = configService.get('port');
   await app.listen(appPort);
-  console.log(`Server is running on port ${appPort}`);
+  log.log(`Server is running on port ${appPort}`);
 }
 bootstrap();
