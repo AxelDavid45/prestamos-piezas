@@ -1,0 +1,11 @@
+.env
+.eslintrc.js
+.prettierrc
+env.example
+Dockerfile
+.dockerignore
+.git
+.gitignore
+.npmrc
+npm-debug.log
+node_modules

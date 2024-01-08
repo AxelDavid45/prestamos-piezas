@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { Logger } from 'nestjs-pino';
+import { EnvVariables } from './config/schema';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -24,7 +25,7 @@ async function bootstrap() {
     prefix: 'v',
   });
 
-  const appPort = configService.get('port');
+  const appPort = configService.get(EnvVariables.APP_PORT);
   await app.listen(appPort);
   log.log(`Server is running on port ${appPort}`);
 }
