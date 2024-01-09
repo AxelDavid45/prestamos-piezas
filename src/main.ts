@@ -1,9 +1,10 @@
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { Logger } from 'nestjs-pino';
 import { EnvVariables } from './config/schema';
+import { BusinessExceptionFilter } from './exceptions/exception-handler';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -26,6 +27,8 @@ async function bootstrap() {
   });
 
   const appPort = configService.get(EnvVariables.APP_PORT);
+  const httpAdapter = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new BusinessExceptionFilter(httpAdapter));
   await app.listen(appPort);
   log.log(`Server is running on port ${appPort}`);
 }
