@@ -6,6 +6,5 @@ export const configSchema = Joi.object({
     .default('development'),
   APP_PORT: Joi.number().default(9000),
   DATABASE_URI: Joi.string().required(),
-  DATABASE_SSL: Joi.boolean().default(false),
   LOG_LEVEL: Joi.string().default('info'),
 });

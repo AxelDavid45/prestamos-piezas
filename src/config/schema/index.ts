@@ -2,6 +2,5 @@ export enum EnvVariables {
   NODE_ENV = 'NODE_ENV',
   APP_PORT = 'APP_PORT',
   DATABASE_URI = 'DATABASE_URI',
-  DATABASE_SSL = 'DATABASE_SSL',
   LOG_LEVEL = 'LOG_LEVEL',
 }
