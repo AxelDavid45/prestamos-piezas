@@ -16,14 +16,11 @@ export class GenerateAmountService {
 
   async execute(command: GenerateAmountCommand): Promise<GenerateAmountOut> {
     const { id, weight } = command;
-    this.logger.log(command, 'command');
     const loan = await this.loansModel
       .findOne({
         publicId: id,
       })
       .exec();
-
-    this.logger.log(loan);
 
     if (!loan) {
       throw new EntityNotFoundException({
