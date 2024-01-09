@@ -1,4 +1,4 @@
-import { Controller, Get, VERSION_NEUTRAL, Version } from '@nestjs/common';
+import { Controller, Get, VERSION_NEUTRAL } from '@nestjs/common';
 
 @Controller({ version: VERSION_NEUTRAL })
 export class AppController {
