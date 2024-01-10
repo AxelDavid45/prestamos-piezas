@@ -1,5 +1,8 @@
 version: 0.2
 
+env:
+  variables:
+    ECR_REGISTRY_URL: '819988951863.dkr.ecr.us-east-1.amazonaws.com/monte-piedad'
 phases:
   pre_build:
     commands:
