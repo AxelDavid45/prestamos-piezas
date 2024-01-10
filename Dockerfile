@@ -19,5 +19,5 @@ RUN npm ci --omit=dev
 
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 
-EXPOSE 9000
+EXPOSE 8080
 CMD ["dumb-init", "node", "./dist/main.js"]

@@ -1,10 +1,13 @@
-import { Injectable, Logger } from '@nestjs/common';
+import {
+  Injectable,
+  Logger,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { GenerateAmountOut } from './generate-amount.out';
 import { GenerateAmountCommand } from './generate-amount.command';
 import { InjectModel } from '@nestjs/mongoose';
 import { Loan } from '../../models/loans.model';
 import { Model } from 'mongoose';
-import { EntityNotFoundException } from '../../../exceptions/entity-not-found.exception';
 
 @Injectable()
 export class GenerateAmountService {
@@ -23,7 +26,7 @@ export class GenerateAmountService {
       .exec();
 
     if (!loan) {
-      throw new EntityNotFoundException({
+      throw new UnprocessableEntityException({
         code: 'LOAN_NOT_FOUND',
         message: 'Conditions not found',
         httpStatus: 404,

@@ -1,0 +1,24 @@
+services:
+  app:
+    image: 819988951863.dkr.ecr.us-east-1.amazonaws.com/monte-piedad:latest
+    container_name: monte-piedad-backend
+    restart: always
+    ports:
+      - 80:9000
+    environment:
+      - LOG_LEVEL=info
+      - DATABASE_URI=${DATABASE_URI}
+    networks:
+      - monte-network
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:6
+    container_name: monte-piedad-database
+    networks:
+      - monte-network
+
+networks:
+  monte-network:
+    driver: bridge
