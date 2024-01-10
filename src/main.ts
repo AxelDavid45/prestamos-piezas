@@ -29,7 +29,7 @@ async function bootstrap() {
   const appPort = configService.get(EnvVariables.APP_PORT);
   const httpAdapter = app.get(HttpAdapterHost);
   app.useGlobalFilters(new BusinessExceptionFilter(httpAdapter));
-  await app.listen(appPort);
+  await app.listen(appPort, '0.0.0.0');
   log.log(`Server is running on port ${appPort}`);
 }
 bootstrap();
